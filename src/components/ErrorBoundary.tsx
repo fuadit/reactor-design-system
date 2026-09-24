@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
-import { AlertTriangle, RotateCcw } from "lucide-react";
-import { Component, ReactNode } from "react";
+import { Icon } from "@/components/ui/Icon";
+import { Component, type ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
@@ -14,41 +14,62 @@ interface State {
 class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = { hasError: false, error: null };
+    this.state = {
+      hasError: false,
+      error: null,
+    };
   }
 
   static getDerivedStateFromError(error: Error): State {
-    return { hasError: true, error };
+    return {
+      hasError: true,
+      error,
+    };
   }
 
   render() {
     if (this.state.hasError) {
       return (
-        <div className="flex items-center justify-center min-h-screen p-8 bg-background">
-          <div className="flex flex-col items-center w-full max-w-2xl p-8">
-            <AlertTriangle
+        <div className="flex min-h-screen items-center justify-center bg-background p-4 sm:p-8">
+          <div className="flex w-full max-w-2xl flex-col items-center p-4 sm:p-8">
+            <Icon
+              icon="solar:danger-triangle-bold-duotone"
               size={48}
-              className="text-destructive mb-6 flex-shrink-0"
+              className="mb-6 shrink-0 text-destructive"
             />
 
-            <h2 className="text-xl mb-4">An unexpected error occurred.</h2>
+            <h2 className="mb-4 text-center text-xl font-semibold">
+              An unexpected error occurred.
+            </h2>
 
-            <div className="p-4 w-full rounded bg-muted overflow-auto mb-6">
-              <pre className="text-sm text-muted-foreground whitespace-break-spaces">
+            <div className="mb-6 max-h-[50vh] w-full overflow-auto rounded-xl bg-muted p-4">
+              <pre className="whitespace-pre-wrap wrap-break-words text-sm text-muted-foreground">
                 {this.state.error?.stack}
               </pre>
             </div>
 
             <button
+              type="button"
               onClick={() => window.location.reload()}
               className={cn(
-                "flex items-center gap-2 px-4 py-2 rounded-lg",
+                "inline-flex items-center justify-center gap-2",
+                "rounded-lg px-4 py-2",
                 "bg-primary text-primary-foreground",
-                "hover:opacity-90 cursor-pointer"
+                "transition-opacity duration-200",
+                "hover:opacity-90",
+                "focus-visible:outline-none",
+                "focus-visible:ring-2",
+                "focus-visible:ring-primary",
+                "focus-visible:ring-offset-2",
+                "cursor-pointer"
               )}
             >
-              <RotateCcw size={16} />
-              Reload Page
+              <Icon
+                icon="solar:refresh-bold"
+                size={16}
+              />
+
+              <span>Reload Page</span>
             </button>
           </div>
         </div>

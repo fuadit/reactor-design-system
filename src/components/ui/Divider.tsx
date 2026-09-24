@@ -1,1 +1,1 @@
-export { Divider } from "./Primitives";
+export function Divider() { return <div style={{ height: 1, background: "var(--border)", width: "100%" }} aria-hidden="true" />; }

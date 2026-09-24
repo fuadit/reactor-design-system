@@ -1,7 +1,7 @@
 import { useEffect, useId, useState, type ReactNode } from "react";
 import type { InputHTMLAttributes, TextareaHTMLAttributes, SelectHTMLAttributes } from "react";
 import { Icon } from "./Icon";
-import { Button, Card } from "./Primitives";
+import { Button } from "./Primitives";
 
 export function FormField({ label, description, error, required, children }: { label: string; description?: string; error?: string; required?: boolean; children: ReactNode }) {
   return <div className="form-field"><label className="form-label">{label}{required ? <span className="required">*</span> : null}</label>{children}{error ? <span className="form-error">{error}</span> : description ? <span className="form-help">{description}</span> : null}</div>;

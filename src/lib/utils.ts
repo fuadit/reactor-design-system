@@ -1,6 +1,22 @@
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
+export type ClassValue =
+  | string
+  | number
+  | boolean
+  | null
+  | undefined
+  | ClassValue[];
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+export function cn(...inputs: ClassValue[]): string {
+  const values: Array<string | number> = [];
+
+  const flatten = (value: ClassValue): void => {
+    if (Array.isArray(value)) {
+      value.forEach(flatten);
+    } else if (typeof value === "string" || typeof value === "number") {
+      values.push(value);
+    }
+  };
+
+  inputs.forEach(flatten);
+  return values.join(" ");
 }
