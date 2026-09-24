@@ -1,0 +1,18 @@
+import { useState } from "react";
+import { useTheme } from "../../contexts/ThemeContext";
+import { useDirection } from "../../contexts/DirectionContext";
+import { Icon } from "../ui/Icon";
+import { Avatar, IconButton } from "../ui/Primitives";
+import { ThemeCustomizer } from "./ThemeCustomizer";
+
+export function Topbar({ onMenu, onToggleSidebar }: { onMenu: () => void; onToggleSidebar: () => void }) {
+  const { resolvedTheme, toggleTheme } = useTheme();
+  const { direction, toggleDirection } = useDirection();
+  const [profileOpen, setProfileOpen] = useState(false);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [customizerOpen, setCustomizerOpen] = useState(false);
+  return <><header className="topbar">
+    <div className="topbar-leading"><button className="icon-button mobile-only" onClick={onMenu} aria-label="Open navigation"><Icon icon="solar:hamburger-menu-linear" size={20} /></button><button className="icon-button" onClick={onToggleSidebar} aria-label="Toggle sidebar"><Icon icon="solar:sidebar-minimalistic-linear" size={18} /></button><div className="topbar-search"><Icon icon="solar:magnifer-linear" size={17} /><input aria-label="Search" placeholder="Search anything..." /></div></div>
+    <div className="topbar-actions"><IconButton label="Customize theme colors" icon="solar:palette-linear" onClick={() => setCustomizerOpen(true)} /><button className="direction-toggle" onClick={toggleDirection} aria-label={`Switch to ${direction === "rtl" ? "left-to-right" : "right-to-left"} layout`}><span className={direction === "ltr" ? "is-active" : ""}>LTR</span><span className={direction === "rtl" ? "is-active" : ""}>RTL</span></button><IconButton label="Toggle theme" icon={resolvedTheme === "dark" ? "solar:sun-2-linear" : "solar:moon-linear"} onClick={toggleTheme} /><div className="dropdown-wrap"><IconButton label="Notifications" icon="solar:bell-linear" onClick={() => setNotificationsOpen((value) => !value)} />{notificationsOpen ? <div className="dropdown-menu" role="menu" style={{ insetInlineEnd: 0, minWidth: 235 }}><div style={{ padding: "8px 10px 10px", color: "var(--text-faint)", fontSize: 10, fontWeight: 800, textTransform: "uppercase", letterSpacing: ".08em" }}>Notifications</div><div className="dropdown-item"><span style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--primary)" }} /><span>New comment on your component review</span></div><div className="dropdown-item"><span style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--accent)" }} /><span>Weekly design system report is ready</span></div></div> : null}</div><div className="dropdown-wrap"><button className="topbar-leading" style={{ padding: 0, border: 0, background: "transparent", cursor: "pointer" }} onClick={() => setProfileOpen((value) => !value)} aria-expanded={profileOpen}><Avatar initials="NS" size="sm" /><span className="profile-copy" style={{ textAlign: "start" }}><span style={{ display: "block", color: "var(--text)", fontSize: 12, fontWeight: 800 }}>Noura Salem</span><span style={{ display: "block", marginBlockStart: 2, color: "var(--text-faint)", fontSize: 10 }}>Design team</span></span><Icon icon="solar:alt-arrow-down-linear" size={15} className="profile-copy" /></button>{profileOpen ? <div className="dropdown-menu" role="menu"><button className="dropdown-item" role="menuitem" onClick={() => setProfileOpen(false)}><Icon icon="solar:user-circle-linear" size={15} />Profile</button><button className="dropdown-item" role="menuitem" onClick={() => setProfileOpen(false)}><Icon icon="solar:settings-linear" size={15} />Preferences</button></div> : null}</div></div>
+  </header><ThemeCustomizer open={customizerOpen} onClose={() => setCustomizerOpen(false)} /></>;
+}

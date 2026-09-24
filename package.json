@@ -1,5 +1,5 @@
 {
-  "name": "shbeeklbeek-admin",
+  "name": "fuad-reactor-design-system",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,12 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@iconify-json/solar": "^1.2.12",
     "@tailwindcss/vite": "^4.3.3",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.4",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
+    "@iconify-icon/react": "^3.0.4",
     "@iconify/react": "^6.0.2",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
