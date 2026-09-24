@@ -1,1 +1,3 @@
-export { Switch } from "./Components";
+export function Switch({ checked, onChange, label }: { checked: boolean; onChange: (checked: boolean) => void; label?: string }) {
+  return <label className="check-control">{label ? <span>{label}</span> : null}<button type="button" className={`toggle ${checked ? "is-on" : ""}`} role="switch" aria-checked={checked} onClick={() => onChange(!checked)}><span className="toggle-thumb" /></button></label>;
+}

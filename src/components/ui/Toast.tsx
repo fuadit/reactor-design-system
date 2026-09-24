@@ -1,1 +1,6 @@
-export { ToastStack } from "./Components";
+import { Icon } from "./Icon";
+
+export interface ToastApi { show: (title: string, description: string, tone?: "success" | "warning" | "danger" | "info") => void; }
+export function ToastStack({ items, onDismiss }: { items: { id: number; title: string; description: string; tone: "success" | "warning" | "danger" | "info" }[]; onDismiss: (id: number) => void }) {
+  return <div className="toast-stack" aria-live="polite">{items.map((item) => <div className="toast" key={item.id}><Icon icon={item.tone === "success" ? "solar:check-circle-bold-duotone" : item.tone === "danger" ? "solar:danger-triangle-bold-duotone" : item.tone === "warning" ? "solar:bell-bold-duotone" : "solar:info-circle-bold-duotone"} size={22} color={`var(--${item.tone === "danger" ? "danger" : item.tone})`} /><div className="toast-copy"><div className="toast-title">{item.title}</div><div className="toast-description">{item.description}</div></div><button className="toast-close" aria-label="Dismiss" onClick={() => onDismiss(item.id)}><Icon icon="solar:close-circle-linear" size={16} /></button></div>)}</div>;
+}
