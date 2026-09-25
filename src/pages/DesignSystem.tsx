@@ -316,7 +316,6 @@ export function DesignSystem() {
             <div className="type-sample">
               <span
                 style={{
-                  fontFamily: "Space Grotesk",
                   fontSize: 25,
                   fontWeight: 700,
                   letterSpacing: "-.05em",

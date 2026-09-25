@@ -1742,10 +1742,10 @@ a {
     position: relative;
     display: grid;
     place-items: center;
-    gap: 4px;
+    gap: 2px;
     width: 100%;
     min-width: 0;
-    height: 80px;
+    height: 90px;
     margin-inline: auto;
     border-radius: 18px;
     color: var(--text-faint);
@@ -1753,9 +1753,8 @@ a {
     font-weight: 750;
   }
   .mobile-nav-item span {
-    height: 25px;
+    height: 30px;
   }
-
   .mobile-nav-item::before {
     position: absolute;
     inset-block-start: 4px;
