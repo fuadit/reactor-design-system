@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTheme } from "../../contexts/ThemeContext";
-import { useDirection } from "../../contexts/DirectionContext";
+import { useDirection } from "../../hooks/useDirection";
 import { Icon } from "../ui/Icon";
 import { Avatar, IconButton } from "../ui/Primitives";
 import { ThemeCustomizer } from "./ThemeCustomizer";
