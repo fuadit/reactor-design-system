@@ -8,16 +8,13 @@ type noop = (...args: any[]) => any;
 export function usePersistFn<T extends noop>(fn: T): T {
   const fnRef = useRef<T>(fn);
 
-  // تحديث المرجعية بعد كل Render لضمان القيمة الأخيرة
   useLayoutEffect(() => {
     fnRef.current = fn;
   });
 
-  // استخدام useCallback بمرجعية ثابتة مع تفادي الوصول المباشر للـ Ref في Render
-  return useCallback(
-    ((...args) => {
-      return fnRef.current?.(...args);
-    }) as T,
-    []
-  );
+  const persistFn = useCallback((...args: Parameters<T>): ReturnType<T> => {
+    return fnRef.current(...args);
+  }, []);
+
+  return persistFn as T;
 }
