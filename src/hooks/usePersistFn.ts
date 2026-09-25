@@ -1,20 +1,23 @@
-import { useRef } from "react";
+import { useRef, useLayoutEffect, useCallback } from "react";
 
 type noop = (...args: any[]) => any;
 
 /**
- * usePersistFn instead of useCallback to reduce cognitive load
+ * usePersistFn (similar to useEvent / useLatest)
  */
-export function usePersistFn<T extends noop>(fn: T) {
+export function usePersistFn<T extends noop>(fn: T): T {
   const fnRef = useRef<T>(fn);
-  fnRef.current = fn;
 
-  const persistFn = useRef<T>(null);
-  if (!persistFn.current) {
-    persistFn.current = function (this: unknown, ...args) {
-      return fnRef.current!.apply(this, args);
-    } as T;
-  }
+  // تحديث المرجعية بعد كل Render لضمان القيمة الأخيرة
+  useLayoutEffect(() => {
+    fnRef.current = fn;
+  });
 
-  return persistFn.current!;
+  // استخدام useCallback بمرجعية ثابتة مع تفادي الوصول المباشر للـ Ref في Render
+  return useCallback(
+    ((...args) => {
+      return fnRef.current?.(...args);
+    }) as T,
+    []
+  );
 }
