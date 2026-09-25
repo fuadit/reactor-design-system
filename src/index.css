@@ -1763,7 +1763,6 @@ a {
   .mobile-nav-item span {
     height: 25px;
   }
-
   .mobile-nav-item::before {
     position: absolute;
     inset-block-start: 4px;
@@ -1778,6 +1777,9 @@ a {
       background var(--duration-normal) var(--ease-out),
       transform var(--duration-normal) var(--ease-out);
   }
+  html[dir="rtl"] .mobile-nav-item::before {
+    transform: translateX(50%) scale(0.88);
+  }
   .mobile-nav-item > * {
     position: relative;
     z-index: 1;
@@ -1788,10 +1790,10 @@ a {
   }
   .mobile-nav-item.is-active::before {
     background: color-mix(in srgb, var(--primary) 14%, var(--surface));
-    transform: translateX(50%) scale(1);
-  }
-  html[dir="ltr"] .mobile-nav-item.is-active::before {
     transform: translateX(-50%) scale(1);
+  }
+  html[dir="rtl"] .mobile-nav-item.is-active::before {
+    transform: translateX(50%) scale(1);
   }
 }
 
