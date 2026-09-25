@@ -1,8 +1,9 @@
 import { useMemo } from "react";
-import { useTheme, THEME_PRESETS, type ThemeColorKey } from "../../contexts/ThemeContext";
 import type { ThemeMode } from "../../types";
 import { Button } from "../ui/Primitives";
 import { Drawer } from "../ui/Components";
+import { THEME_PRESETS, type ThemeColorKey } from "../../constants/themeConstants";
+import { useTheme } from "../../contexts/ThemeContext";
 
 const colorFields: { key: ThemeColorKey; label: string; description: string }[] = [
   { key: "primary", label: "Primary", description: "Main actions and active states" },
