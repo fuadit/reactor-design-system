@@ -1340,7 +1340,7 @@ a {
 .toast-stack {
   position: fixed;
   z-index: 100;
-  inset-block-end: 22px;
+  inset-block-start: 22px;
   inset-inline-end: 22px;
   display: grid;
   gap: 10px;
@@ -1726,26 +1726,34 @@ a {
     z-index: 50;
     inset-inline: 0;
     inset-block-end: 0;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
+    justify-content: space-around; /* يوزع المساحات بالتساوي حول العناصر */
+    align-items: center;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     align-items: center;
     height: calc(80px + env(safe-area-inset-bottom));
-    padding: 4px 12px calc(10px + env(safe-area-inset-bottom));
+    padding: 25px 12px calc(10px + env(safe-area-inset-bottom));
     border: 0;
     border-block-start: 1px solid var(--border);
     border-radius: 0;
-    background: color-mix(in srgb, var(--surface) 96%, transparent);
+    background: color-mix(in srgb, var(--surface) 75%, transparent);
+
+  /* 2. إضافة الخاصية مع -webkit- لدعم متصفحات Safari */
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+
     box-shadow: 0 -8px 28px rgba(31, 35, 50, 0.09);
     backdrop-filter: blur(18px);
   }
+
   .mobile-nav-item {
     position: relative;
     display: grid;
     place-items: center;
-    gap: 2px;
+    gap: 4px;
     width: 100%;
     min-width: 0;
-    height: 90px;
+    height: 80px;
     margin-inline: auto;
     border-radius: 18px;
     color: var(--text-faint);
@@ -1753,8 +1761,9 @@ a {
     font-weight: 750;
   }
   .mobile-nav-item span {
-    height: 30px;
+    height: 25px;
   }
+
   .mobile-nav-item::before {
     position: absolute;
     inset-block-start: 4px;
